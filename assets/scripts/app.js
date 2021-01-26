@@ -9,36 +9,38 @@ let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 ////////////////////////////////////////////////////
 
-// UI
+// Set UI
 adjustHealthBars(chosenMaxLife);
+////////////////////////////////////////////////////
 
-// Actions
+// MAIN LOGIC - ACTIONS
+// Attack by Player
 function attack(type) {
-  let maxDamage;
+  let damageByPlayer;
   if (type === 'NORMAL') {
-    maxDamage = ATTACK_VALUE;
+    damageByPlayer = dealMonsterDamage(ATTACK_VALUE);
   } else if (type === 'STRONG') {
-    maxDamage = STRONG_ATTACK_VALUE;
+    damageByPlayer = dealMonsterDamage(STRONG_ATTACK_VALUE);
   }
-
-  const damage = dealMonsterDamage(maxDamage);
-  currentMonsterHealth -= damage;
+  currentMonsterHealth -= damageByPlayer;
 
   endRound();
 }
 
+// Attack by Monster & Round Ending
 function endRound() {
-  const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
-  currentPlayerHealth -= playerDamage;
+  const damageByMonster = dealPlayerDamage(MONSTER_ATTACK_VALUE);
+  currentPlayerHealth -= damageByMonster;
 
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
     alert('You won!');
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
     alert('You lost!');
-  } else if (currentPlayerHealth && currentMonsterHealth <= 0) {
-    alert('Draw!');
+  } else if (currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
+    alert('You have a draw!');
   }
 }
+////////////////////////////////////////////////////
 
 // Event Handlers
 function attackHandler() {
@@ -50,17 +52,17 @@ function strongAttackHandler() {
 }
 
 function healPlayerHandler() {
-  let healValue;
+  let updatedHealValue;
   if (currentPlayerHealth >= chosenMaxLife - HEAL_VALUE) {
-    alert('You can\'t heal above max life');
-    healValue = chosenMaxLife - currentPlayerHealth;
+    alert("You can't heal above max life");
+    updatedHealValue = chosenMaxLife - currentPlayerHealth;
   } else {
-    healValue = HEAL_VALUE;
+    updatedHealValue = HEAL_VALUE;
   }
 
-  increasePlayerHealth(healValue);
-  currentPlayerHealth += healValue;
-  
+  increasePlayerHealth(updatedHealValue);
+  currentPlayerHealth += updatedHealValue;
+
   endRound();
 }
 
