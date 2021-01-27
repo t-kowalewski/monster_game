@@ -7,6 +7,7 @@ const HEAL_VALUE = 20;
 let chosenMaxLife = 100;
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
+let hasBonusLife = true;
 ////////////////////////////////////////////////////
 
 // Set UI
@@ -27,11 +28,23 @@ function attack(type) {
   endRound();
 }
 
-// Attack by Monster & Round Ending
+// Attack by Monster & Round Ending - Bonus Life Check
 function endRound() {
+  const initialPlayerHealth = currentPlayerHealth;
   const damageByMonster = dealPlayerDamage(MONSTER_ATTACK_VALUE);
   currentPlayerHealth -= damageByMonster;
 
+  // Bonus Life Check
+  if (currentPlayerHealth <= 0 && hasBonusLife) {
+    hasBonusLife = false;
+    currentPlayerHealth = initialPlayerHealth;
+    // Update UI when bonus life used
+    removeBonusLife();
+    setPlayerHealth(currentPlayerHealth);
+    alert("You've used your bonus life");
+  }
+
+  // End Round Check
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
     alert('You won!');
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
