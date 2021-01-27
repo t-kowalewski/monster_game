@@ -14,7 +14,7 @@ let hasBonusLife = true;
 adjustHealthBars(chosenMaxLife);
 ////////////////////////////////////////////////////
 
-// MAIN LOGIC - ACTIONS
+// MAIN LOGIC
 // Attack by Player
 function attack(type) {
   let damageByPlayer;
@@ -47,11 +47,21 @@ function endRound() {
   // End Round Check
   if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
     alert('You won!');
+    reset();
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
     alert('You lost!');
+    reset();
   } else if (currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
     alert('You have a draw!');
+    reset();
   }
+}
+
+// Reset Game
+function reset() {
+  currentPlayerHealth = chosenMaxLife;
+  currentMonsterHealth = chosenMaxLife;
+  resetGame(chosenMaxLife);
 }
 ////////////////////////////////////////////////////
 
