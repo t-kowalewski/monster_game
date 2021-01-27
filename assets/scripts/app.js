@@ -4,6 +4,9 @@ const STRONG_ATTACK_VALUE = 17;
 const MONSTER_ATTACK_VALUE = 15;
 const HEAL_VALUE = 20;
 
+const NORMAL_ATTACK = 'NORMAL';
+const STRONG_ATTACK = 'STRONG';
+
 // User Input
 const enteredValue = prompt('Maximum life for you monster', '100'); //returns string
 let chosenMaxLife = parseInt(enteredValue);
@@ -26,9 +29,9 @@ adjustHealthBars(chosenMaxLife);
 // Attack by Player
 function attack(type) {
   let damageByPlayer;
-  if (type === 'NORMAL') {
+  if (type === NORMAL_ATTACK) {
     damageByPlayer = dealMonsterDamage(ATTACK_VALUE);
-  } else if (type === 'STRONG') {
+  } else if (type === STRONG_ATTACK) {
     damageByPlayer = dealMonsterDamage(STRONG_ATTACK_VALUE);
   }
   currentMonsterHealth -= damageByPlayer;
@@ -75,11 +78,11 @@ function reset() {
 
 // Event Handlers
 function attackHandler() {
-  attack('NORMAL');
+  attack(NORMAL_ATTACK);
 }
 
 function strongAttackHandler() {
-  attack('STRONG');
+  attack(STRONG_ATTACK);
 }
 
 function healPlayerHandler() {
