@@ -38,6 +38,15 @@ function attack(type) {
   let damageByPlayer;
   let logEvent;
 
+  // Ternary operator - Optional shortcut - They RETURN value
+  // const damageByPlayer =
+  //   type === NORMAL_ATTACK
+  //     ? dealMonsterDamage(ATTACK_VALUE)
+  //     : dealMonsterDamage(STRONG_ATTACK_VALUE);
+  // const logEvent =
+  //   type === NORMAL_ATTACK ? LOG_PLAYER_ATTACK : LOG_PLAYER_STRONG_ATTACK;
+  /////////////////////////////////////////
+
   if (type === NORMAL_ATTACK) {
     damageByPlayer = dealMonsterDamage(ATTACK_VALUE);
     logEvent = LOG_PLAYER_ATTACK;
