@@ -139,6 +139,25 @@ function writeToLog(event, value, monsterHealth, playerHealth) {
     playerHealth: playerHealth,
   };
 
+  // Switch Case - Alternative to "if else", always compare ===
+  // switch (event) {
+  //   case LOG_PLAYER_ATTACK:
+  //     logEntry.target = 'Monster';
+  //     break;
+  //   case LOG_PLAYER_STRONG_ATTACK:
+  //     logEntry.target = 'Monster';
+  //     break;
+  //   case LOG_MONSTER_ATTACK:
+  //     logEntry.target = 'Player';
+  //     break;
+  //   case LOG_PLAYER_HEAL:
+  //     logEntry.target = 'Player';
+  //     break;
+  //   default:
+  //     logEntry = {}
+  // }
+  /////////////////////////////////////////
+
   if (event === LOG_PLAYER_ATTACK) {
     logEntry.target = 'Monster';
   } else if (event === LOG_PLAYER_STRONG_ATTACK) {
