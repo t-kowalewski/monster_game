@@ -204,7 +204,20 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  console.log(gameLog);
+  for (let i = 0; i < 3; i++) {
+    console.log('-----');
+  }
+
+  let i = 0;
+  for (const arrItem of gameLog) {
+    console.log(`#${i}`);
+
+    for (objKey in arrItem) {
+      console.log(`${objKey} => ${arrItem[objKey]}`);
+    }
+    i++;
+  }
+  // console.log(gameLog);
 }
 
 // Event Listeners
