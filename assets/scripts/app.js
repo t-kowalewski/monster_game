@@ -26,6 +26,7 @@ let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 let hasBonusLife = true;
 let gameLog = [];
+let lastLoggedEntry;
 ////////////////////////////////////////////////////
 
 // Set UI
@@ -210,11 +211,16 @@ function printLogHandler() {
 
   let i = 0;
   for (const arrItem of gameLog) {
-    console.log(`#${i}`);
+    if ((!lastLoggedEntry && lastLoggedEntry !== 0) || lastLoggedEntry < i) {
+      console.log(`#${i}`);
 
-    for (objKey in arrItem) {
-      console.log(`${objKey} => ${arrItem[objKey]}`);
+      for (objKey in arrItem) {
+        console.log(`${objKey} => ${arrItem[objKey]}`);
+      }
+      lastLoggedEntry = i;
+      break;
     }
+
     i++;
   }
   // console.log(gameLog);
