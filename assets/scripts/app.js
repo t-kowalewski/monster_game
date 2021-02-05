@@ -19,12 +19,21 @@ function getUserInput() {
   const parsedValue = parseInt(enteredValue);
 
   if (isNaN(parsedValue) || parsedValue <= 0) {
-    throw { message: 'Invalid user input. Not a number or <= 0' };
+    throw { message: 'Invalid user input. Not a number or <= 0' }; // custom error
   }
   return parsedValue;
 }
 
-let chosenMaxLife = getUserInput();
+let chosenMaxLife;
+
+// Error handling
+try {
+  chosenMaxLife = getUserInput();
+} catch (error) {
+  console.log(error);
+  chosenMaxLife = 100;
+  alert('Wrong input. Default value of 100 was used');
+}
 
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
